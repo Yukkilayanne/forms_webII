@@ -25,7 +25,7 @@
         </div>
       <div class="form-group">
           <label for="instagram">instagram</label>
-          <input type="text" id="instagram" nome="instagram required">
+          <input type="text" id="instagram" nome="instagram" required>
           </div>
         <div class="form-group">
           <label for="telefone">Telefone:</label>
@@ -58,6 +58,8 @@
         const telefone = document.getElementById("telefone").value;
         const email = document.getElementById("email").value;
         const descricao = document.getElementById("descricao").value;
+        const instagram = document.getElementById("instagram").value;
+
 
         // Cria uma variável com os dados do formulário
         const dados = {
@@ -65,19 +67,32 @@
           telefone: telefone,
           email: email,
           descricao: descricao,
+          instagram: instagram,
         };
         console.log(dados);
         console.log(JSON.stringify(dados));
 
         try {
           // Faz uma requisição para a sua API
-          await fetch("INSIRA O LINK DA SUA API AQUI", {
+          await fetch("https://banco-de-dados-mermas-digitaais.onrender.com/formulario", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(dados),
-          });
+          }).then(
+            (Response) => {
+              if(Response.ok){
+                alert (" formulario enviado com sucesso");
+
+                
+              } else {
+                alert("Erro ao enviar o formulario");
+              }
+              
+
+            }
+          );
         } catch (error) {
           console.log(error);
         }
